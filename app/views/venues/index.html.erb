@@ -51,6 +51,7 @@
       </tr>
 
       <% @venues.each do |venue| %>
+      <% if venue.bookmarks.find_by("user_id").user_id == current_user.id %>
       <tr>
         <td><a href="/venues/<%= venue.id %>"><%= venue.name %></a></td>
         <td>
@@ -59,6 +60,7 @@
           <% end %>
         </td>
       </tr>
+      <% end %>
       <% end %>
     </table>
     <%= paginate @venues, theme: 'twitter-bootstrap-4' %>
