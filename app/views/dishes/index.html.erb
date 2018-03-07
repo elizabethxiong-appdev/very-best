@@ -99,7 +99,15 @@
           <% if Bookmark.find_by(:dish_id => dish.id) == nil %>
           
           <form action="/create_bookmark" class="form-inline" method="post">
+            <!-- Label and input for user_id -->
+            <input type="hidden" id="user_id" name="user_id" class="form-control" value="<%= current_user.id %>">
+        
+            <!-- Label and input for dish_id -->
+            <input type="hidden" id="dish_id" name="dish_id" class="form-control" value="<%= dish.id %>">
+            
+            <!-- Dropdown menu of venues -->
             <%= select_tag("venue_id", options_from_collection_for_select(Venue.order(:name), :id, :name), :class => "form-control", :prompt => "Choose a venue...") %>
+            
             <button class="btn btn-primary btn">
               <i class="fa fa-heart"></i>
             </button>
