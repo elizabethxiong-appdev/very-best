@@ -125,7 +125,7 @@
           </form>
           
           <% else %>
-          <% @venue_id = Bookmark.find_by(:dish_id => dish.id).venue_id %>
+          <% @venue_id = Bookmark.where(:dish_id => dish.id).last.venue_id %>
           <a href="venues/<%= @venue_id %>">
             <%= Venue.find(@venue_id).name %>
           </a>
