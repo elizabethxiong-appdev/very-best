@@ -96,8 +96,8 @@
       <tr>
         <td><a href="/dishes/<%= dish.id %>"><%= dish.name %></td></a>
         <td>
-          <a href="venues/<%= Bookmark.find_by(:dish_id => dish.id).venue_id %>">
-            <% @venue_id = Bookmark.find_by(:dish_id => dish.id).venue_id %>
+          <% @venue_id = Bookmark.find_by(:dish_id => dish.id).venue_id %>
+          <a href="venues/<%= @venue_id %>">
             <%= Venue.find(@venue_id).name %>
           </a>
         </td>
