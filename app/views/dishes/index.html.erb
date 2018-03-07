@@ -96,11 +96,23 @@
       <tr>
         <td><a href="/dishes/<%= dish.id %>"><%= dish.name %></td></a>
         <td>
+          <% if Bookmark.find_by(:dish_id => dish.id) == nil %>
+          
+          <form action="/create_bookmark" class="form-inline" method="post">
+            <%= select_tag("venue_id", options_from_collection_for_select(Venue.order(:name), :id, :name), :class => "form-control", :prompt => "Choose a venue...") %>
+            <button class="btn btn-primary btn">
+              <i class="fa fa-heart"></i>
+            </button>
+          </form>
+          
+          <% else %>
           <% @venue_id = Bookmark.find_by(:dish_id => dish.id).venue_id %>
           <a href="venues/<%= @venue_id %>">
             <%= Venue.find(@venue_id).name %>
           </a>
+          <% end %>
         </td>
+
         <td>
           <% if dish.cuisine.present? %>
             <a href="/cuisines/<%= dish.cuisine.id %>">
