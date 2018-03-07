@@ -48,24 +48,22 @@
 
       <% @dish.bookmarks.order(:created_at).reverse_order.each do |bookmark| %>
         <li class="list-group-item">
+          <p>
+            <a href="/venues/<%= bookmark.venue_id %>">
+              <%= Venue.find(bookmark.venue_id).name %>
+            </a>
           
-          <a href="/venues/<%= @venue_id %>">
-            <%= Venue.find(bookmark.venue_id).name %>
-          </a>
-          
-          
-          <div class="btn-group btn-group-xs float-right">
             <small class="float-right text-muted">
               <%= time_ago_in_words(bookmark.created_at) %> ago
+           
+              <a href="/bookmarks/<%= bookmark.id %>/edit">
+                <i class="fa fa-edit"></i>
+              </a>
+              <a href="/delete_bookmark/<%= bookmark.id %>" rel="nofollow">
+                <i class="fa fa-trash-o"></i>
+              </a>
             </small>
-            
-            <a href="/bookmarks/<%= bookmark.id %>/edit">
-              <i class="fa fa-edit"></i>
-            </a>
-            <a href="/delete_bookmark/<%= bookmark.id %>" rel="nofollow">
-              <i class="fa fa-trash-o"></i>
-            </a>
-          </div>
+          </p>
           
         </li>
       <% end %>
